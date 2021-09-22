@@ -1,0 +1,54 @@
+create database db_generation_game_online;
+
+use db_generation_game_online;
+
+drop table tb_classe;
+
+create table tb_classe(
+id bigint auto_increment,
+nome varchar(255) not null,
+console varchar(255) not null,
+ativo boolean not null,
+primary key(id)
+);
+
+insert into tb_classe (nome, console,ativo) values ("Mortal Kombat-11","Xbox",true);
+insert into tb_classe (nome, console,ativo) values ("Naruto Shippuden","Playstation",true);
+insert into tb_classe (nome, console,ativo) values ("Dragonball-2","Xbox",true);
+insert into tb_classe (nome, console,ativo) values ("Street Fighter V","Playstation",true);
+insert into tb_classe (nome, console,ativo) values ("Avengers","Xbox",true);
+
+
+select * from tb_classe;
+
+create table tb_personagem(
+id bigint auto_increment,
+nome varchar (255) not null,
+poder varchar (255) not null,
+especial varchar (255) not null,
+velocidade int not null,
+resistencia int not null,
+atq_poder int not null,
+dfs_poder int not null,
+classe_id bigint,
+primary key(id),
+foreign key (classe_id) references tb_classe (id)
+);
+
+
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Naruto","persistência","Bomba Bijuu",87,67,3000,2000, 2);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Sasuke","frieza","Amaterasu",96,60,4000,1000, 2);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Subzero","gelo","Shao Kahn",96,89,5000,3000, 1);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Scorpion","escorpião","Chain Reaction",88,75,850,800, 1);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Hulk","força","transformação",100,100,1000,1000, 5);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Thor","raios","martelo",80,80,900,600, 5);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Ryu","luta","Hadoken",100,100,5000,2000, 4);
+insert into tb_personagem (nome, poder, especial, velocidade, resistencia, atq_poder, dfs_poder, classe_id) values ("Goku","Super Saiyajin","Kamehameha",100,100,5000,5000, 3);
+
+select * from tb_personagem where atq_poder > 2000;
+select * from tb_personagem where dfs_poder between 1000 and 2000;
+select * from tb_personagem where nome Like "%c%";
+
+select * from tb_personagem inner join tb_classe
+on tb_classe.id = tb_personagem.classe_id
+where tb_classe.id = 5;
